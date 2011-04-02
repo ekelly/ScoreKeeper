@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+/Users/eric/Dropbox/eclipse/ScoreKeeper/.metadata/.plugins/org.eclipse.jdt.core
+4281563131.index
+3021528939.index
