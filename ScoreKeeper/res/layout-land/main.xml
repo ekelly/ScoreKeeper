@@ -19,26 +19,26 @@
 	</LinearLayout>
 	<TableLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:gravity="center"
-		android:layout_alignParentBottom="true" android:layout_marginTop="10dip" >
+		android:layout_alignParentBottom="true" android:layout_marginTop="20dip" >
 		<TableRow android:layout_height="wrap_content" android:id="@+id/tableRow1"
 			android:layout_width="fill_parent">
 			<Button android:id="@+id/plus1" android:text="@string/plus1"
-				android:layout_weight="1" android:textSize="20dip"/>
+				android:layout_weight="1" android:textSize="20dip" android:layout_height="50dip"/>
 			<Button android:id="@+id/plus2" android:text="@string/plus2"
-				android:layout_weight="1" android:textSize="20dip"/>
+				android:layout_weight="1" android:textSize="20dip" android:layout_height="50dip"/>
 			<Button android:id="@+id/plus3" android:text="@string/plus3"
-				android:layout_weight="1" android:textSize="20dip"/>
+				android:layout_weight="1" android:textSize="20dip" android:layout_height="50dip"/>
 		</TableRow>
 		<TableRow android:layout_height="wrap_content" android:id="@+id/tableRow2"
 			android:layout_width="fill_parent">
 			<Button android:text="@string/min1" android:id="@+id/min1"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_height="50dip"
 				android:layout_weight="1" android:textSize="20dip"/>
 			<Button android:text="@string/min2" android:id="@+id/min2"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_height="50dip"
 				android:layout_weight="1" android:textSize="20dip"/>
 			<Button android:text="@string/min3" android:id="@+id/min3"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_height="50dip"
 				android:layout_weight="1" android:textSize="20dip"/>
 		</TableRow>
 	</TableLayout>
