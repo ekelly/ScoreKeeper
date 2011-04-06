@@ -25,20 +25,21 @@ public final class R {
         public static final int icon=0x7f020003;
         public static final int menu_add=0x7f020004;
         public static final int menu_background=0x7f020005;
-        public static final int menu_next=0x7f020006;
-        public static final int menu_prev=0x7f020007;
-        public static final int menu_sub=0x7f020008;
-        public static final int nogradient=0x7f020009;
-        public static final int rgradient=0x7f02000a;
+        public static final int menu_list=0x7f020006;
+        public static final int menu_next=0x7f020007;
+        public static final int menu_prev=0x7f020008;
+        public static final int menu_sub=0x7f020009;
+        public static final int nogradient=0x7f02000a;
+        public static final int rgradient=0x7f02000b;
     }
     public static final class id {
-        public static final int add_player=0x7f070013;
+        public static final int add_player=0x7f070015;
         public static final int list=0x7f070000;
         public static final int min=0x7f070004;
         public static final int min1=0x7f07000d;
         public static final int min2=0x7f07000e;
         public static final int min3=0x7f07000f;
-        public static final int next=0x7f070015;
+        public static final int next=0x7f070017;
         public static final int p_name=0x7f070001;
         public static final int p_score=0x7f070002;
         public static final int player=0x7f070007;
@@ -46,13 +47,15 @@ public final class R {
         public static final int plus1=0x7f070009;
         public static final int plus2=0x7f07000a;
         public static final int plus3=0x7f07000b;
-        public static final int prev=0x7f070014;
+        public static final int prev=0x7f070016;
         public static final int score=0x7f070006;
-        public static final int set_backgound=0x7f070010;
+        public static final int set_backgound=0x7f070013;
+        public static final int set_player=0x7f070010;
+        public static final int set_score=0x7f070011;
         public static final int sub_player=0x7f070012;
         public static final int tableRow1=0x7f070008;
         public static final int tableRow2=0x7f07000c;
-        public static final int view_all=0x7f070011;
+        public static final int view_all=0x7f070014;
         public static final int window=0x7f070005;
     }
     public static final class layout {
@@ -61,7 +64,8 @@ public final class R {
         public static final int player_list=0x7f030002;
     }
     public static final class menu {
-        public static final int menu=0x7f060000;
+        public static final int cmenu=0x7f060000;
+        public static final int menu=0x7f060001;
     }
     public static final class string {
         public static final int alert_cancel=0x7f050009;

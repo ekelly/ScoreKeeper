@@ -3,7 +3,6 @@ package net.erickelly.score;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 
 public class PlayerList extends ListActivity {
@@ -13,11 +12,9 @@ public class PlayerList extends ListActivity {
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		Log.d("PlayerList", "got this far");
 		defplayer = getIntent().getExtras().getInt("playernum");
-		Log.d("defplayer", defplayer.toString());
-		Log.d("playerList size", ((Integer) Score.players.size()).toString());
 		this.setListAdapter(new PlayerArrayAdapter(this, Score.players));
+		registerForContextMenu(getListView());
 	}
 	
 	@Override

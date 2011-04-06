@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/set_backgound" 
-	android:title="Change Background Color"
+	android:title="Change Background"
 	android:icon="@drawable/menu_background"/>
 	<item android:id="@+id/view_all"
-	android:title="View All" />
+	android:title="View All"
+	android:icon="@drawable/menu_list" />
 	<item android:id="@+id/sub_player" 
 	android:title="Remove Player"
 	android:icon="@drawable/menu_sub"/>
@@ -12,9 +13,9 @@
 	android:title="Add Player"
 	android:icon="@drawable/menu_add"/>
 	<item android:id="@+id/prev"
-	android:title="Prev Player"
+	android:title="Previous"
 	android:icon="@drawable/menu_prev"/>
 	<item android:id="@+id/next"
-	android:title="Next Player"
+	android:title="Next"
 	android:icon="@drawable/menu_next"/>
 </menu>

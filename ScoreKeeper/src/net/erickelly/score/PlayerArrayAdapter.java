@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,9 +21,7 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements OnClickL
 
 	public PlayerArrayAdapter(Activity context, ArrayList<Player> playerList) {
 		super(context, R.layout.list, playerList);
-		Log.d("playerList size", ((Integer) playerList.size()).toString());
 		this.context = context;
-		Log.d("Got this far","");
 		this.playerList = playerList;
 	}
 
@@ -59,6 +58,7 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements OnClickL
 			holder.plus.setTag(position);
 			rowView.setTag(holder);
 			rowView.setOnClickListener(new OnItemClickListener(position));
+			rowView.setOnCreateContextMenuListener(new OnItemClickListener(position));
 		} else {
 			holder = (ViewHolder) rowView.getTag();
 		}
