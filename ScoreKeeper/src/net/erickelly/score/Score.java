@@ -542,7 +542,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         
-        final Integer i = data.getExtras().getInt("playerid");
+        Integer r = data.getExtras().getInt("playerid");
+        
+        if (r >= players.size()) {
+        	r = players.size() - 1;
+        }
+        
+        final Integer i = r;
         
         if(resultCode==RESULT_OK) {            
             

@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -22,10 +21,12 @@ public class PlayerList extends ListActivity {
 	AdapterContextMenuInfo info;
 	AlertDialog.Builder alert;
 	EditText input;
+	Integer defvalue;
 	
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
+		defvalue = getIntent().getExtras().getInt("playernum");
 		this.setListAdapter(new PlayerArrayAdapter(this, Score.players));
 		registerForContextMenu(getListView());
 	}
@@ -34,7 +35,7 @@ public class PlayerList extends ListActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 	    	Intent intent = new Intent();
-	    	intent.putExtra("playerid", Score.id);
+	    	intent.putExtra("playerid", defvalue);
 	    	setResult(RESULT_OK, intent);
 	    	finish();
 	    	return true;
@@ -53,9 +54,9 @@ public class PlayerList extends ListActivity {
 	    Player selectedPlayer = (Player) getListAdapter().getItem(info.position);
 		
 		menu.setHeaderTitle(selectedPlayer.name + " Actions");
-		menu.add("Set Name");
-		menu.add("Set Score");
-		menu.add("Remove Player");
+		menu.add(0, 0, 0, "Set Name");
+		menu.add(0, 1, 0, "Set Score");
+		menu.add(0, 2, 0, "Remove Player");
 		if(Score.players.size() == 1) {
 			menu.getItem(2).setEnabled(false);
 		}
@@ -66,7 +67,6 @@ public class PlayerList extends ListActivity {
 //		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item 
 //		.getMenuInfo(); 
 		super.onContextItemSelected(item);
-		Log.d("Item clicked", ((Integer) item.getItemId()).toString());
 		/* Switch on the ID of the item, to get what the user selected. */
 		switch (item.getItemId()) { 
 		case 0:
@@ -79,7 +79,7 @@ public class PlayerList extends ListActivity {
 			return true;
 		case 2:  
 			/* Remove it from the list. */ 
-			Score.players.remove(selectedPlayer);
+			Score.players.remove(info.position);
 			refreshPlayers();
 			return true;
 		}
