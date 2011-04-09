@@ -49,11 +49,8 @@ public class PlayerList extends ListActivity {
 	    // Get the info on which item was selected
 	    info = (AdapterContextMenuInfo) menuInfo;
 
-	    // Get the Adapter behind the ListView
-	    Adapter adapter = getListAdapter();
-
 	    // Retrieve the item that was clicked on
-	    Player selectedPlayer = (Player) adapter.getItem(info.position);
+	    Player selectedPlayer = (Player) getListAdapter().getItem(info.position);
 		
 		menu.setHeaderTitle(selectedPlayer.name + " Actions");
 		menu.add("Set Name");
