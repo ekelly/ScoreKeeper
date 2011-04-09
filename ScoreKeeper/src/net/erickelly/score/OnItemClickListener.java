@@ -29,41 +29,42 @@ public class OnItemClickListener extends Activity implements OnClickListener, On
 		((Activity) arg0.getContext()).finish();
 	}
 	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Player Actions");
-		menu.add("Set Name");
-		menu.add("Set Score");
-		menu.add("Remove Player");
-		if(Score.players.size() == 1) {
-			menu.getItem(2).setEnabled(false);
-		}
-	}
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//		super.onCreateContextMenu(menu, v, menuInfo);
+//		menu.setHeaderTitle("Player Actions");
+//		menu.add("Set Name");
+//		menu.add("Set Score");
+//		menu.add("Remove Player");
+//		if(Score.players.size() == 1) {
+//			menu.getItem(2).setEnabled(false);
+//		}
+//	}
+//	
+//	@Override
+//	public boolean onContextItemSelected(MenuItem item) {
+////		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item 
+////		.getMenuInfo(); 
+//		super.onContextItemSelected(item);
+//		Log.d("OnContext", "called");
+//		/* Switch on the ID of the item, to get what the user selected. */ 
+//		switch (item.getItemId()) { 
+//		case 0:
+//			return true;
+//		case 1:
+//			return true;
+//		case 2:  
+//			/* Remove it from the list. */ 
+//			Score.players.remove(rPosition);
+//			/* Update the List */
+//			refreshPlayers();
+//			return true;
+//		} 
+//		return false; 
+//	}
 	
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-//		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item 
-//		.getMenuInfo(); 
-		Log.d("OnContext", "called");
-		/* Switch on the ID of the item, to get what the user selected. */ 
-		switch (item.getItemId()) { 
-		case 0:
-			return true;
-		case 1:
-			return true;
-		case 2:  
-			/* Remove it from the list. */ 
-			Score.players.remove(rPosition);
-			/* Update the List */
-			refreshPlayers();
-			return true;
-		} 
-		return false; 
-	}
-	
-	private void refreshPlayers() { 
-		ListActivity la = (ListActivity) this.getParent().getParent();
-		la.setListAdapter(new PlayerArrayAdapter(la, Score.players)); 
-	}
+//	private void refreshPlayers() { 
+//		ListActivity la = (ListActivity) this.getParent().getParent();
+//		la.setListAdapter(new PlayerArrayAdapter(la, Score.players)); 
+//	}
 }

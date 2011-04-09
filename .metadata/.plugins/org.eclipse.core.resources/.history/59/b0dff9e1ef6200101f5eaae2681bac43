@@ -1,0 +1,42 @@
+package net.erickelly.score;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.view.View;
+import android.widget.EditText;
+
+public class CustomDialog extends Activity {
+
+	EditText input;
+	
+	public CustomDialog(String startText, final View v) {
+    	
+    	// Setup dialog
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		input = new EditText(this);
+		input.setMinWidth(250);
+		alert.setView(input);
+		input.setText(startText);
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String result = input.getText().toString().trim();
+				result(result);
+			}
+		});
+
+		alert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.cancel();}
+				});
+		alert.show();
+    }
+	
+	public String result(String r) {
+		return r;
+	}
+	
+}

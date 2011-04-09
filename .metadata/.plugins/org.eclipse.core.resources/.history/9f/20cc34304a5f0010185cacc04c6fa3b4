@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/set_backgound" 
+	android:title="Change Background Color"
+	android:icon="@drawable/menu_background"/>
+	<item android:id="@+id/view_all"
+	android:icon="@drawable/menu_list" 
+	android:title="View All" />
+	<item android:id="@+id/sub_player" 
+	android:title="Remove Player"
+	android:icon="@drawable/menu_sub"/>
+	<item android:id="@+id/add_player" 
+	android:title="Add Player"
+	android:icon="@drawable/menu_add"/>
+	<item android:id="@+id/prev"
+	android:title="Prev Player"
+	android:icon="@drawable/menu_prev"/>
+	<item android:id="@+id/next"
+	android:title="Next Player"
+	android:icon="@drawable/menu_next"/>
+</menu>

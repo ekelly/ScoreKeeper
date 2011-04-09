@@ -1,0 +1,87 @@
+package net.erickelly.score;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.KeyEvent;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+
+public class PlayerList extends ListActivity {
+	
+	Integer defplayer;
+	
+	/** Called when the activity is first created. */
+	public void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
+//		defplayer = getIntent().getExtras().getInt("playernum");
+		this.setListAdapter(new PlayerArrayAdapter(this, Score.players));
+		registerForContextMenu(getListView());
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	    	Intent intent = new Intent();
+	    	intent.putExtra("playerid", Score.id);
+	    	setResult(RESULT_OK, intent);
+	    	finish();
+	    	return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		
+	    // Get the info on which item was selected
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+
+	    // Get the Adapter behind your ListView
+	    Adapter adapter = getListAdapter();
+
+	    // Retrieve the item that was clicked on
+	    Player p = (Player) adapter.getItem(info.position);
+		
+		menu.setHeaderTitle(p.name + " Actions");
+		menu.add("Set Name");
+		menu.add("Set Score");
+		menu.add("Remove Player");
+		if(Score.players.size() == 1) {
+			menu.getItem(2).setEnabled(false);
+		}
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+//		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item 
+//		.getMenuInfo(); 
+		super.onContextItemSelected(item);
+		Log.d("OnContext", "called");
+		/* Switch on the ID of the item, to get what the user selected. */ 
+		switch (item.getItemId()) { 
+		case 0:
+			return true;
+		case 1:
+			return true;
+		case 2:  
+			/* Remove it from the list. */ 
+			Score.players.remove(rPosition);
+			/* Update the List */
+			refreshPlayers();
+			return true;
+		} 
+		return false; 
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		Score.save();
+	}
+}

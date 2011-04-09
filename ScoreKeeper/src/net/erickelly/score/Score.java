@@ -36,13 +36,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	TextView player;
 	AlertDialog.Builder alert;
 	EditText input;
-	SharedPreferences pref;
+	static SharedPreferences pref;
 	Resources res;
 	Drawable shape;
 	RelativeLayout ll;
 	Handler h;
-	String background;
-	String separater = "<>";
+	static String background;
+	static String separater = "<>";
 	Handler handler;
 	
 	// Button Reference Variables
@@ -60,9 +60,9 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	static Integer set3;
 	
 	// Player variables
-	Integer id;
-	String name;
-	Integer score;
+	static Integer id;
+	static String name;
+	static Integer score;
 	static ArrayList<Player> players = new ArrayList<Player>();
 		
     @Override
@@ -109,19 +109,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		handler = new Handler();
     	
     }
-//    
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//    	super.onSaveInstanceState(outState);
-//    	outState.putInt("current-id", id);
-//    }
-//    
-//	@Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//    	super.onRestoreInstanceState(savedInstanceState);
-//    	id = (Integer) savedInstanceState.get("current-id");
-//    	getPlayer(id);
-//    }
     
     private void restorePlayers() {
     	String ps = pref.getString("players", (new Player("Player",0)).serialize());
@@ -271,17 +258,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 						setScore(result);
 						break;
 					case R.id.player:
-						if((!result.contains(separater)) && 
-								(!result.contains(Player.separater)) &&
-								(!result.equals(""))) {
-							setPlayer(result);
-						} else {
-							Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
-									separater + " and " + Player.separater + " are not allowed.",Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.BOTTOM, 0, 100);
-							toast.show();
-							createDialog(result,findViewById(R.id.player));
-						}
+						setPlayer(result);
 						break;
 					case R.id.min1:
 						setButton(result, plus1, min1, 1);
@@ -432,7 +409,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     			int value = Integer.parseInt(s);
     			score = value;
     			current_score.setText((CharSequence) score.toString());
-    			pref.edit().putInt("current_score", score).commit();
+    			players.get(id).score = value;
     		} catch(NumberFormatException nfe) {
     			Log.d("setScore","Could not parse " + nfe);
     			Toast toast = Toast.makeText(getApplicationContext(), "Must be an integer.",Toast.LENGTH_SHORT);
@@ -505,8 +482,20 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     }
     
     public void setPlayer(String p) {
-    	player.setText((CharSequence) p);
-    	name = p;
+    	
+    	if((!p.contains(separater)) && 
+				(!p.contains(Player.separater)) &&
+				(!p.equals(""))) {
+    		player.setText((CharSequence) p);
+        	name = p;
+        	players.get(id).name = p;
+		} else {
+			Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
+					separater + " and " + Player.separater + " are not allowed.",Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.BOTTOM, 0, 100);
+			toast.show();
+			createDialog(p,findViewById(R.id.player));
+		}
     }
     
     public void setSets() {
@@ -521,10 +510,12 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         min3.setText("-" + set3.toString());
     }
     
-    public void save() {
+    static public void save() {
+    	
+    	Log.d("Trying to save","");
     	
     	String pstring = savePlayers();
-    	    	
+    	
     	Editor prefedit = pref.edit();
     	prefedit.putString("players", pstring);
 		prefedit.putInt("set1", set1);
@@ -536,9 +527,9 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		
     }
     
-    private String savePlayers() {
-    	players.get(id).name = name;
-    	players.get(id).score = score;
+    private static String savePlayers() {
+//    	players.get(id).name = name;
+//    	players.get(id).score = score;
 
     	String acc = "";
     	for(int index = 0; index < players.size(); index++) {
