@@ -42,7 +42,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	RelativeLayout ll;
 	Handler h;
 	static String background;
-	static String separater = "<>";
+	static String separator = "<>";
 	Handler handler;
 	
 	// Button Reference Variables
@@ -112,7 +112,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     private void restorePlayers() {
     	String ps = pref.getString("players", (new Player("Player",0)).serialize());
-		String a[] = ps.split(separater);
+		String a[] = ps.split(separator);
 		if (players.size() == 0) {
 			for(int i = 0; i < a.length; i++) {
 				players.add(Player.unpack(a[i]));
@@ -167,8 +167,15 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     public void onResume() {
     	super.onResume();
     	
+    	Bundle extras = getIntent().getExtras();
+    	
+    	if(extras != null) {
+    		id = extras.getInt("playerid");
+    	} else {
+        	id = pref.getInt("current_player", 0);
+    	}
+    	
     	// Get stored value of items
-    	id = pref.getInt("current_player", 0);
     	score = players.get(id).score;
         name = players.get(id).name;
     	restoreBackground();
@@ -383,9 +390,9 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 
 	public void getPlayer(int player_id) {
 		// Get new stuff
+		id = player_id;
 		name = players.get(player_id).name;
 		score = players.get(player_id).score;
-		id = player_id;
 		
 		// display stuff
 		current_score.setText(score.toString());
@@ -483,15 +490,15 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     public void setPlayer(String p) {
     	
-    	if((!p.contains(separater)) && 
-				(!p.contains(Player.separater)) &&
+    	if((!p.contains(separator)) && 
+				(!p.contains(Player.separator)) &&
 				(!p.equals(""))) {
     		player.setText((CharSequence) p);
         	name = p;
         	players.get(id).name = p;
 		} else {
 			Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
-					separater + " and " + Player.separater + " are not allowed.",Toast.LENGTH_LONG);
+					separator + " and " + Player.separator + " are not allowed.",Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.BOTTOM, 0, 100);
 			toast.show();
 			createDialog(p,findViewById(R.id.player));
@@ -511,9 +518,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     }
     
     static public void save() {
-    	
-    	Log.d("Trying to save","");
-    	
+    	    	
     	String pstring = savePlayers();
     	
     	Editor prefedit = pref.edit();
@@ -522,6 +527,9 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		prefedit.putInt("set2", set2);
 		prefedit.putInt("set3", set3);
 		prefedit.putString("background",background);
+		if(id >= players.size()) {
+			id = players.size() - 1;
+		}
 		prefedit.putInt("current_player", id);
 		prefedit.commit();
 		
@@ -533,7 +541,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 
     	String acc = "";
     	for(int index = 0; index < players.size(); index++) {
-        	acc = acc + players.get(index).serialize() + separater;
+        	acc = acc + players.get(index).serialize() + separator;
     	}
     	return acc;
 	}
@@ -541,14 +549,24 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Bundle extras = data.getExtras();
+        final Integer i;
+        Integer r;
+        if (extras != null) {
+        	r = extras.getInt("playerid");
+            Log.d("playerid", r.toString());
+            Log.d("players.size()", ((Integer)players.size()).toString());
+            if (r >= players.size()) {	
+            	r = players.size() - 1;
+            	Log.d("r",r.toString());
+            }
         
-        Integer r = data.getExtras().getInt("playerid");
+            i = r;
+            Log.d("i = ", i.toString());
         
-        if (r >= players.size()) {
-        	r = players.size() - 1;
+        } else {
+        	i = 0;
         }
-        
-        final Integer i = r;
         
         if(resultCode==RESULT_OK) {            
             

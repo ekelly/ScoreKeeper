@@ -3,7 +3,7 @@ package net.erickelly.score;
 
 public class Player {
 	
-	final static String separater = "##";
+	final static String separator = "##";
 	// static Integer player_num;  somehow add this to help with naming players
 	
 	String name;
@@ -15,13 +15,13 @@ public class Player {
 	}
 	
 	public String serialize() {
-		String s = name + separater + score.toString();
+		String s = name + separator + score.toString();
 		return s;
 	}
 	
 	public static Player unpack(String s) {
 		
-		String a[] = s.split(separater);
+		String a[] = s.split(separator);
 		Integer i = Integer.parseInt(a[1]);
 		return new Player(a[0],i);
 	}

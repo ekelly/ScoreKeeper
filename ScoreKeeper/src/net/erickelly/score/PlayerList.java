@@ -104,13 +104,13 @@ public class PlayerList extends ListActivity {
 
 				switch(itemid) {
 				case 0:
-					if((!result.contains(Score.separater)) && 
-							(!result.contains(Player.separater)) &&
+					if((!result.contains(Score.separator)) && 
+							(!result.contains(Player.separator)) &&
 							(!result.equals(""))) {
 						Score.players.get(info.position).name = result;
 					} else {
 						Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
-								Score.separater + " and " + Player.separater + " are not allowed.",Toast.LENGTH_LONG);
+								Score.separator + " and " + Player.separator + " are not allowed.",Toast.LENGTH_LONG);
 						toast.setGravity(Gravity.BOTTOM, 0, 100);
 						toast.show();
 						createDialog(result,0);
