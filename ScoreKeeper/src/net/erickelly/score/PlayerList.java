@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -96,6 +97,9 @@ public class PlayerList extends ListActivity {
         alert = new AlertDialog.Builder(this);
 		input = new EditText(this);
 		input.setMinWidth(250);
+		if(itemid == 1) {
+			input.setInputType(InputType.TYPE_CLASS_PHONE);
+		}
 		alert.setView(input);
 		input.setText(startText);
 		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

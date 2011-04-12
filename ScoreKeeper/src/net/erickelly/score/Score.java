@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -254,8 +255,11 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         alert = new AlertDialog.Builder(this);
 		input = new EditText(this);
 		input.setMinWidth(250);
-		alert.setView(input);
+		if(v.getId() != R.id.player) {
+			input.setInputType(InputType.TYPE_CLASS_PHONE);
+		}
 		input.setText(startText);
+		alert.setView(input);
 		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String result = input.getText().toString().trim();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="24" version="2.0">
+<workbench progressCount="35" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="0" y="22">
+<window height="874" width="720" x="0" y="22">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="com.android.ide.eclipse.ddms.views.HeapView"/>
 </fastViewData>
@@ -16,13 +16,14 @@
 <coolItem id="adt.actionSet.wizards" itemType="typeToolBarContribution" x="76" y="22"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="100" y="22"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="54" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="79" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="98" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="54" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="com.android.ide.eclipse.editors.layout.LayoutEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -47,27 +48,27 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Score.java" partName="Score.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/Score.java" title="Score.java" tooltip="ScoreKeeper/src/net/erickelly/score/Score.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Score.java" partName="Score.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/Score.java" title="Score.java" tooltip="ScoreKeeper/src/net/erickelly/score/Score.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/src/net/erickelly/score/Score.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="15390" selectionTopPixel="1357"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3247" selectionTopPixel="815"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Player.java" partName="Player.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/Player.java" title="Player.java" tooltip="ScoreKeeper/src/net/erickelly/score/Player.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/src/net/erickelly/score/Player.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="30" selectionTopPixel="12"/>
+<editorState selectionHorizontalPixel="0" selectionLength="9" selectionOffset="460" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerArrayAdapter.java" partName="PlayerArrayAdapter.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java" title="PlayerArrayAdapter.java" tooltip="ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="217" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="57" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerList.java" partName="PlayerList.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/PlayerList.java" title="PlayerList.java" tooltip="ScoreKeeper/src/net/erickelly/score/PlayerList.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/src/net/erickelly/score/PlayerList.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="779" selectionTopPixel="27"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4007" selectionTopPixel="371"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OnItemClickListener.java" partName="OnItemClickListener.java" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java" title="OnItemClickListener.java" tooltip="ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="27" selectionOffset="412" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="59" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="ScoreKeeper Manifest" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/AndroidManifest.xml" title="ScoreKeeper Manifest" tooltip="ScoreKeeper/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
+<editor id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="ScoreKeeper Manifest" path="/Users/eric/Dropbox/eclipse/ScoreKeeper/ScoreKeeper/AndroidManifest.xml" title="ScoreKeeper Manifest" tooltip="ScoreKeeper/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ScoreKeeper/AndroidManifest.xml"/>
 </editor>
 </editors>
@@ -81,7 +82,9 @@
 <view id="com.android.ide.eclipse.ddms.views.ThreadView" partName="Threads">
 <viewState/>
 </view>
-<view id="org.eclipse.debug.ui.BreakpointView" partName="Breakpoints"/>
+<view id="org.eclipse.debug.ui.BreakpointView" partName="Breakpoints">
+<viewState/>
+</view>
 <view id="org.eclipse.debug.ui.VariableView" partName="Variables">
 <viewState/>
 </view>
@@ -113,7 +116,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors (3 items)"/>
+<category IMemento.internal.id="Errors (2 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -166,7 +169,7 @@
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 <view id="com.android.ide.eclipse.ddms.views.AllocTrackerView" partName="Allocation Tracker"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
@@ -299,24 +302,27 @@
 <perspective_action id="org.eclipse.wst.jsdt.ui.JavaPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<fastViewBars/>
+<fastViewBars>
+<fastViewBar fastViewLocation="16384" id="left" orientation="512" selectedTabId="org.eclipse.jdt.ui.PackageExplorer" style="0">
+<fastViews>
+<view id="org.eclipse.jdt.ui.PackageExplorer" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
-<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
-<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.ui.navigator.ProjectExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1bf8785" ratio="0.75" ratioLeft="762" ratioRight="254" relationship="2" relative="left">
@@ -524,7 +530,7 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.7489481" ratioLeft="534" ratioRight="179" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.6633941" ratioLeft="473" ratioRight="240" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
@@ -577,166 +583,165 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.menu.MenuEditor" path="/ScoreKeeper/res/menu/cmenu.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/PlayerList.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.menu.MenuEditor" path="/ScoreKeeper/res/menu/cmenu.xml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/PlayerList.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/Score.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/ScoreKeeper/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;android.app(Activity.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang(ClassLoader.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;android.os(Handler.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;android.os(Looper.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang.reflect(InvocationTargetException.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang(ThreadGroup.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/Player.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java"/>
 </editors>
-<item historyLabel="OnItemClickListener.java" index="0">
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15195" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15256" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15275" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15377" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15438" y="0"/>
+</item>
+<item historyLabel="ClassLoader.class" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15438" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15438" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15726" y="0"/>
+</item>
+<item historyLabel="Activity.class" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Handler.class" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Looper.class" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="InvocationTargetException.class" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ThreadGroup.class" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15726" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15560" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15533" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15558" y="0"/>
+</item>
+<item historyLabel="Player.java" index="8">
+<position info="not_deleted" x="460" y="9"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15042" y="0"/>
+</item>
+<item historyLabel="PlayerList.java" index="0">
+<position info="not_deleted" x="4007" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15042" y="0"/>
+</item>
+<item historyLabel="PlayerList.java" index="0">
+<position info="not_deleted" x="4007" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="15042" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="13436" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="5304" y="35"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="5110" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="5263" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="5194" y="0"/>
+</item>
+<item historyLabel="PlayerList.java" index="0">
+<position info="not_deleted" x="4007" y="0"/>
+</item>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="14311" y="0"/>
+</item>
+<item historyLabel="OnItemClickListener.java" index="9">
+<position info="not_deleted" x="59" y="0"/>
+</item>
+<item historyLabel="PlayerList.java" index="0">
+<position info="not_deleted" x="4007" y="0"/>
+</item>
+<item historyLabel="OnItemClickListener.java" index="9">
+<position info="not_deleted" x="59" y="0"/>
+</item>
+<item historyLabel="PlayerArrayAdapter.java" index="10">
+<position info="not_deleted" x="249" y="0"/>
+</item>
+<item historyLabel="PlayerArrayAdapter.java" index="10">
 <position/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1920" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="397" y="109"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1781" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="508" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="2040" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="508" y="0"/>
-</item>
-<item historyLabel="PlayerArrayAdapter.java" index="1">
-<position info="not_deleted" x="518" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="508" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="2040" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1548" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1548" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1548" y="0"/>
-</item>
-<item historyLabel="cmenu.xml" index="2"/>
-<item historyLabel="PlayerArrayAdapter.java" index="1">
-<position info="not_deleted" x="2160" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1548" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
-</item>
-<item historyLabel="PlayerArrayAdapter.java" index="1">
-<position info="not_deleted" x="1497" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
-</item>
-<item historyLabel="OnItemClickListener.java" index="0">
+<item historyLabel="PlayerArrayAdapter.java" index="10">
 <position/>
 </item>
-<item historyLabel="PlayerArrayAdapter.java" index="1">
-<position info="not_deleted" x="2381" y="0"/>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="14311" y="0"/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
+<item historyLabel="PlayerArrayAdapter.java" index="10">
 <position/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1145" y="0"/>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="14254" y="0"/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1355" y="0"/>
+<item historyLabel="PlayerArrayAdapter.java" index="10">
+<position/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1351" y="0"/>
+<item historyLabel="Score.java" index="1">
+<position info="not_deleted" x="6912" y="1268"/>
 </item>
-<item historyLabel="PlayerList.java" index="3">
-<position info="not_deleted" x="505" y="0"/>
+<item historyLabel="PlayerArrayAdapter.java" index="10">
+<position info="not_deleted" x="57" y="0"/>
 </item>
-<item historyLabel="OnItemClickListener.java" index="0">
-<position info="not_deleted" x="1351" y="0"/>
+<item historyLabel="Player.java" index="8">
+<position info="not_deleted" x="460" y="9"/>
 </item>
-<item historyLabel="PlayerArrayAdapter.java" index="4">
-<position info="not_deleted" x="2335" y="0"/>
+<item active="true" historyLabel="Score.java" index="1">
+<position info="not_deleted" x="6912" y="1268"/>
 </item>
-<item historyLabel="cmenu.xml" index="5"/>
-<item historyLabel="PlayerArrayAdapter.java" index="4">
-<position info="not_deleted" x="217" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="507" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="869" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="5691" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="907" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="901" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="14935" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="664" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="15392" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="664" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="15392" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="14325" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="664" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="894" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="14325" y="0"/>
-</item>
-<item historyLabel="Score.java" index="7">
-<position info="not_deleted" x="15390" y="0"/>
-</item>
-<item historyLabel="PlayerList.java" index="6">
-<position info="not_deleted" x="779" y="0"/>
-</item>
-<item active="true" historyLabel="ScoreKeeper Manifest" index="8"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -748,50 +753,35 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="ScoreKeeper/AndroidManifest.xml">
-<persistable path="/ScoreKeeper/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ThreadGroup.class" tooltip="java.lang.ThreadGroup">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang(ThreadGroup.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.menu.MenuEditor" name="cmenu.xml" tooltip="ScoreKeeper/res/menu/cmenu.xml">
-<persistable path="/ScoreKeeper/res/menu/cmenu.xml"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="InvocationTargetException.class" tooltip="java.lang.reflect.InvocationTargetException">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang.reflect(InvocationTargetException.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OnItemClickListener.java" tooltip="ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java">
-<persistable path="/ScoreKeeper/src/net/erickelly/score/OnItemClickListener.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Handler.class" tooltip="android.os.Handler">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;android.os(Handler.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerList.java" tooltip="ScoreKeeper/src/net/erickelly/score/PlayerList.java">
-<persistable path="/ScoreKeeper/src/net/erickelly/score/PlayerList.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ClassLoader.class" tooltip="java.lang.ClassLoader">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang(ClassLoader.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerArrayAdapter.java" tooltip="ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java">
-<persistable path="/ScoreKeeper/src/net/erickelly/score/PlayerArrayAdapter.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Integer.class" tooltip="java.lang.Integer">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;java.lang(Integer.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Player.java" tooltip="ScoreKeeper/src/net/erickelly/score/Player.java">
-<persistable path="/ScoreKeeper/src/net/erickelly/score/Player.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Activity.class" tooltip="android.app.Activity">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ScoreKeeper/\/Applications\/Google\/android-sdk-mac_x86\/platforms\/android-4\/android.jar&lt;android.app(Activity.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.menu.MenuEditor" name="menu.xml" tooltip="ScoreKeeper/res/menu/menu.xml">
-<persistable path="/ScoreKeeper/res/menu/menu.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomDialog.java" tooltip="ScoreKeeper/src/net/erickelly/score/CustomDialog.java">
+<persistable path="/ScoreKeeper/src/net/erickelly/score/CustomDialog.java"/>
 </file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="android757566915245677984.hprof" tooltip="/var/folders/sV/sVLHt0YFFvuQfNA1B3LMOE+++TI/-Tmp-/android757566915245677984.hprof">
-<persistable uri="file:/var/folders/sV/sVLHt0YFFvuQfNA1B3LMOE+++TI/-Tmp-/android757566915245677984.hprof"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="android6996320370435421824.hprof" tooltip="/var/folders/sV/sVLHt0YFFvuQfNA1B3LMOE+++TI/-Tmp-/android6996320370435421824.hprof">
-<persistable uri="file:/var/folders/sV/sVLHt0YFFvuQfNA1B3LMOE+++TI/-Tmp-/android6996320370435421824.hprof"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Score.java" tooltip="ScoreKeeper/src/net/erickelly/score/Score.java">
-<persistable path="/ScoreKeeper/src/net/erickelly/score/Score.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="list.xml" tooltip="ScoreKeeper/res/layout/list.xml">
+<persistable path="/ScoreKeeper/res/layout/list.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="main.out.xml" tooltip="ScoreKeeper/res/layout/main.out.xml">
 <persistable path="/ScoreKeeper/res/layout/main.out.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="main.xml" tooltip="ScoreKeeper/res/layout/main.xml">
-<persistable path="/ScoreKeeper/res/layout/main.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.resources.ResourcesEditor" name="bgradient.xml" tooltip="Score/res/drawable/bgradient.xml">
-<persistable path="/Score/res/drawable/bgradient.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlayerArrayAdapter.java" tooltip="Score/src/net/erickelly/score/PlayerArrayAdapter.java">
-<persistable path="/Score/src/net/erickelly/score/PlayerArrayAdapter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" name="default.properties" tooltip="ScoreKeeper/default.properties">
-<persistable path="/ScoreKeeper/default.properties"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.layout.LayoutEditor" name="main.xml" tooltip="ScoreKeeper/res/layout-land/main.xml">
+<persistable path="/ScoreKeeper/res/layout-land/main.xml"/>
 </file>
 </mruList>
 </workbench>
