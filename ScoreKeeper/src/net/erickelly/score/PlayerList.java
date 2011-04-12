@@ -164,6 +164,6 @@ public class PlayerList extends ListActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		Score.save();
+		// TODO: make sure database is up to date
 	}
 }

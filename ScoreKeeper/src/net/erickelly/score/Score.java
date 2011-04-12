@@ -6,6 +6,7 @@ import net.erickelly.score.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.Log;
@@ -28,6 +31,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import static net.erickelly.score.Constants.NAME;
+import static net.erickelly.score.Constants.SCORE;
+import static net.erickelly.score.Constants.TABLE_NAME;
+import static android.provider.BaseColumns._ID;
 
 public class Score extends Activity implements OnClickListener, OnLongClickListener {
     /** Called when the activity is first created. */
@@ -45,6 +52,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	static String background;
 	static String separator = "<>";
 	Handler handler;
+	private DatabaseHelper dbHelper;
 	
 	// Button Reference Variables
 	// Names do not refer to actual values, but their positions
@@ -62,6 +70,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	
 	// Player variables
 	static Integer id;
+	static Integer table_id;
 	static String name;
 	static Integer score;
 	static ArrayList<Player> players = new ArrayList<Player>();
@@ -76,7 +85,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         
         pref = getSharedPreferences("preferences",MODE_WORLD_WRITEABLE);
         res = getResources();
-    	       	
+    	
+        dbHelper = new DatabaseHelper(this);
     	restorePlayers();
         
         // Set the on screen handlers
@@ -112,15 +122,57 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     }
     
     private void restorePlayers() {
-    	String ps = pref.getString("players", (new Player("Player",0)).serialize());
-		String a[] = ps.split(separator);
-		if (players.size() == 0) {
-			for(int i = 0; i < a.length; i++) {
-				players.add(Player.unpack(a[i]));
-			}
-		}
-		Log.d("Got this far", "hi");
-    }
+    	
+    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	id = prefs.getInt("current_player", 0);
+    	
+    	String[] FROM = { _ID, NAME, SCORE, };
+    	String ORDER_BY = NAME + " DESC";
+    	// Perform a managed query. The Activity will handle closing 
+    	// and re-querying the cursor when needed. 
+    	try {
+    		SQLiteDatabase db = dbHelper.getReadableDatabase();
+        	Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
+        	startManagingCursor(cursor);
+        	
+        	if(players.size() != 0) {
+        		while(cursor.moveToNext()) {
+        			table_id = (int) cursor.getLong(0);
+        			name = cursor.getString(1);
+        			score = cursor.getInt(2);
+        			players.add(new Player(name,score,table_id));
+        		} 
+        	}
+        	
+        } finally { 
+       		dbHelper.close();
+       		getPlayer(id);
+       	}
+   	}
+    
+    private void savePlayers() {    	
+    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	for(int i = 0; i < players.size(); i++) {
+    		ContentValues values = new ContentValues();
+    		values.put(NAME, players.get(i).name);
+    		values.put(SCORE, players.get(i).score);
+    		db.insertOrThrow(TABLE_NAME, null, values);
+    	}
+    	db.close();
+	}
+    
+    public void savePlayer() {
+		// Save current stuff
+		players.get(id).name = name;
+		players.get(id).score = score;
+	}
+    
+    public void addPlayer(String name) {
+//		players.add(new Player(name, 0));
+//		savePlayer();
+    	// TODO: fix addPlayer
+		getPlayer((players.size() - 1));
+	}
     
     private void restoreBackground() {
     	background = pref.getString("background", "black");
@@ -365,12 +417,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 			getPlayer(id);
 		}
 	}
-
-	public void addPlayer(String name) {
-		players.add(new Player(name, 0));
-		savePlayer();
-		getPlayer((players.size() - 1));
-	}
 	
 	public void prevPlayer() {
 		if(id == 0) {
@@ -401,12 +447,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		// display stuff
 		current_score.setText(score.toString());
 		player.setText(name);
-	}
-	
-	public void savePlayer() {
-		// Save current stuff
-		players.get(id).name = name;
-		players.get(id).score = score;
 	}
 
 	public void setScore(String s) {
@@ -521,12 +561,11 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         min3.setText("-" + set3.toString());
     }
     
-    static public void save() {
+    public void save() {
     	    	
-    	String pstring = savePlayers();
+    	savePlayers();
     	
     	Editor prefedit = pref.edit();
-    	prefedit.putString("players", pstring);
 		prefedit.putInt("set1", set1);
 		prefedit.putInt("set2", set2);
 		prefedit.putInt("set3", set3);
@@ -538,17 +577,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		prefedit.commit();
 		
     }
-    
-    private static String savePlayers() {
-//    	players.get(id).name = name;
-//    	players.get(id).score = score;
-
-    	String acc = "";
-    	for(int index = 0; index < players.size(); index++) {
-        	acc = acc + players.get(index).serialize() + separator;
-    	}
-    	return acc;
-	}
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
