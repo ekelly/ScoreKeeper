@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/set_player" android:title="Set Player Name"></item>
-    <item android:id="@+id/set_score" android:title="Set Score"></item>
-    <item android:title="Remove Player" android:id="@+id/sub_player"></item>
-</menu>

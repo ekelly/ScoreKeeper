@@ -1,9 +1,15 @@
 package net.erickelly.score;
 
+import static android.provider.BaseColumns._ID;
+import static net.erickelly.score.Constants.NAME;
+import static net.erickelly.score.Constants.SCORE;
+import static net.erickelly.score.Constants.TABLE_NAME;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -13,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -24,12 +31,33 @@ public class PlayerList extends ListActivity {
 	EditText input;
 	Integer defvalue;
 	
+	private static String[] FROM = { "Name", "Score" };
+	private static int[] TO = { R.id.p_name, R.id.p_score };
+	
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		defvalue = getIntent().getExtras().getInt("playernum");
-		this.setListAdapter(new PlayerArrayAdapter(this, Score.players));
+		String[] FROM = { _ID, NAME, SCORE, };
+    	String ORDER_BY = _ID + " ASC";
+    	// Perform a managed query. The Activity will handle closing 
+    	// and re-querying the cursor when needed. 
+    	try {
+    		SQLiteDatabase db = dbHelper.getReadableDatabase();
+        	Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
+        	startManagingCursor(cursor);
+        finally {
+        	dbHelper.
+        }
+		showPlayers();
 		registerForContextMenu(getListView());
+	}
+	
+	private void showPlayers(Cursor c) {
+		// set up data binding
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+			new PlayerCursorAdapter(this.getApplicationContext(), c, FROM, TO));
+		setListAdapter(adapter);
 	}
 	
 	@Override

@@ -127,7 +127,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	id = prefs.getInt("current_player", 0);
     	
     	String[] FROM = { _ID, NAME, SCORE, };
-    	String ORDER_BY = NAME + " DESC";
+    	String ORDER_BY = _ID + " ASC";
     	// Perform a managed query. The Activity will handle closing 
     	// and re-querying the cursor when needed. 
     	try {
@@ -171,6 +171,12 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 //		players.add(new Player(name, 0));
 //		savePlayer();
     	// TODO: fix addPlayer
+    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	ContentValues cv = new ContentValues();
+    	cv.put(NAME, "Player"); //+ Integer.parseInt(db.rawQuery("SELECT MAX(" + _ID + ") FROM " + TABLE_NAME, null).getString(0)));
+    	cv.put(SCORE, 0);
+    	db.insert(NAME, SCORE, cv);
+    	db.close();
 		getPlayer((players.size() - 1));
 	}
     

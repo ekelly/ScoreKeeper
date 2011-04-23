@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="android.view.ContextMenu"/>
 <fullyQualifiedTypeName name="android.view.MenuItem"/>
 <fullyQualifiedTypeName name="net.erickelly.score.R.menu"/>
-<fullyQualifiedTypeName name="net.erickelly.score.R.layout"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="android.app.ListActivity"/>
 <fullyQualifiedTypeName name="android.view.MenuInflater"/>
@@ -15,10 +14,13 @@
 <fullyQualifiedTypeName name="android.view.View.OnLongClickListener"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
 <fullyQualifiedTypeName name="android.text.InputType"/>
-<fullyQualifiedTypeName name="net.erickelly.score.R.id"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="android.database.sqlite.SQLiteDatabase"/>
 <fullyQualifiedTypeName name="net.erickelly.score.Constants"/>
 <fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="android.provider.BaseColumns"/>
+<fullyQualifiedTypeName name="android.widget.CursorAdapter"/>
+<fullyQualifiedTypeName name="android.database.Cursor"/>
+<fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter"/>
+<fullyQualifiedTypeName name="net.erickelly.score.R.id"/>
+<fullyQualifiedTypeName name="net.erickelly.score.R.layout"/>
 </qualifiedTypeNameHistroy>
