@@ -23,4 +23,6 @@
 <fullyQualifiedTypeName name="android.widget.SimpleCursorAdapter"/>
 <fullyQualifiedTypeName name="net.erickelly.score.R.id"/>
 <fullyQualifiedTypeName name="net.erickelly.score.R.layout"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.database.sqlite.SQLiteStatement"/>
 </qualifiedTypeNameHistroy>

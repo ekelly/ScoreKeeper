@@ -30,6 +30,7 @@ public class PlayerList extends ListActivity {
 	AlertDialog.Builder alert;
 	EditText input;
 	Integer defvalue;
+	DatabaseHelper dbHelper;
 	
 	private static String[] FROM = { "Name", "Score" };
 	private static int[] TO = { R.id.p_name, R.id.p_score };
@@ -37,6 +38,8 @@ public class PlayerList extends ListActivity {
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
+        dbHelper = new DatabaseHelper(this);
+        
 		defvalue = getIntent().getExtras().getInt("playernum");
 		String[] FROM = { _ID, NAME, SCORE, };
     	String ORDER_BY = _ID + " ASC";
@@ -46,17 +49,17 @@ public class PlayerList extends ListActivity {
     		SQLiteDatabase db = dbHelper.getReadableDatabase();
         	Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, ORDER_BY);
         	startManagingCursor(cursor);
-        finally {
-        	dbHelper.
+    		showPlayers(cursor);
+    	} finally {
+        	dbHelper.close();
         }
-		showPlayers();
 		registerForContextMenu(getListView());
 	}
 	
 	private void showPlayers(Cursor c) {
 		// set up data binding
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-			new PlayerCursorAdapter(this.getApplicationContext(), c, FROM, TO));
+		SimpleCursorAdapter adapter = 
+			new PlayerCursorAdapter(this.getApplicationContext(), R.layout.list, c, FROM, TO);
 		setListAdapter(adapter);
 	}
 	
@@ -116,7 +119,12 @@ public class PlayerList extends ListActivity {
 	}
 	
 	private void refreshPlayers() { 
-		this.setListAdapter(new PlayerArrayAdapter(this, Score.players)); 
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, _ID);
+		this.setListAdapter(
+				new PlayerCursorAdapter(this.getApplicationContext(), 
+						R.layout.list, cursor, FROM, TO)); 
+		db.close();
 	}
 	
 	public void createDialog(String startText, final int itemid) {
