@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + _ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME
-				+ " STRING," + SCORE + " INTEGER);");
+				+ " TEXT," + SCORE + " INTEGER);");
 	}
 
 	@Override

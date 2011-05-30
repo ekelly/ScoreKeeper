@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="android.text.InputType"/>
 <fullyQualifiedTypeName name="android.database.sqlite.SQLiteDatabase"/>
 <fullyQualifiedTypeName name="net.erickelly.score.Constants"/>
-<fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="android.provider.BaseColumns"/>
 <fullyQualifiedTypeName name="android.widget.CursorAdapter"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
@@ -25,4 +24,5 @@
 <fullyQualifiedTypeName name="net.erickelly.score.R.layout"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.database.sqlite.SQLiteStatement"/>
+<fullyQualifiedTypeName name="android.content.ContentValues"/>
 </qualifiedTypeNameHistroy>
