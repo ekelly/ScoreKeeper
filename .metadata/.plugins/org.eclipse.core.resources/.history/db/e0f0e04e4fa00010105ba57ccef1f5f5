@@ -208,14 +208,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
     	Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+TABLE_NAME+";", null);
     	startManagingCursor(c);
+    	db.close();
     	if(c.moveToFirst()) {
     		Log.d("LastPlayer:",((Integer) c.getInt(0)).toString());
-    		int count = c.getInt(0);
-    		db.close();
-    		return count;
+    		return c.getInt(0);
     	}
-    	db.close();
     	return -1;
+    	
     }
     
     private void restoreBackground() {
@@ -415,7 +414,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(true) {
+    	if(players.size() == 1) {
      	   	menu.findItem(R.id.next).setEnabled(false);
      	   	menu.findItem(R.id.prev).setEnabled(false);
      	   	menu.findItem(R.id.sub_player).setEnabled(false);
@@ -465,7 +464,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	   return true;
     }
     
-    // Probably wrong
     private long numPlayers() {
         String sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
         SQLiteStatement statement = 
@@ -500,9 +498,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "< " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void nextPlayer() {
@@ -510,9 +507,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "> " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void getPlayer(int player_id) {

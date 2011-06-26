@@ -510,9 +510,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "> " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void getPlayer(int player_id) {

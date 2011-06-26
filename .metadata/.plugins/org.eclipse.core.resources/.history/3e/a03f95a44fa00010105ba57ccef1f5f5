@@ -465,7 +465,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	   return true;
     }
     
-    // Probably wrong
     private long numPlayers() {
         String sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
         SQLiteStatement statement = 
@@ -500,9 +499,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "< " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void nextPlayer() {
@@ -510,9 +508,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "> " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void getPlayer(int player_id) {

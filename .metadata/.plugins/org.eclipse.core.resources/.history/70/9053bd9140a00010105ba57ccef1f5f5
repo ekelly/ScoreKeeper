@@ -72,7 +72,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	static Integer id;
 	static String name;
 	static Integer score;
-	static SQLiteDatabase db;
+	static ArrayList<Player> players = new ArrayList<Player>();
 	
 	// Helpful constants
 	final String [] columns = new String [] { NAME, SCORE };
@@ -208,14 +208,12 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
     	Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+TABLE_NAME+";", null);
     	startManagingCursor(c);
-    	if(c.moveToFirst()) {
-    		Log.d("LastPlayer:",((Integer) c.getInt(0)).toString());
-    		int count = c.getInt(0);
-    		db.close();
-    		return count;
-    	}
     	db.close();
+    	if(c.moveToFirst()) {
+    		return c.getInt(0);
+    	}
     	return -1;
+    	
     }
     
     private void restoreBackground() {
@@ -274,17 +272,16 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	if(extras != null) {
     		id = extras.getInt("playerid");
     	} else {
-        	id = pref.getInt("current_player", 1);
+        	id = pref.getInt("current_player", 0);
     	}
     	
     	// Get stored value of items
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//Cursor c = db.query(TABLE_NAME, columns, _ID + "=?", new String [] { String.valueOf(id) }, null, null, null);
-    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" FROM "+TABLE_NAME+" WHERE "+_ID+"= "+String.valueOf(id), null);
+    	Cursor c = db.query(TABLE_NAME, columns, _ID + "=?", new String [] { String.valueOf(id) }, null, null, null);
     	startManagingCursor(c);
     	c.moveToFirst();
-    	name = c.getString(0);
-    	score = c.getInt(1);
+    	name = c.getString(1);
+    	score = c.getInt(2);
     	db.close();
     	
     	//score = players.get(id).score;
@@ -294,7 +291,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         
         // display the variables
         player.setText(name);
-    	current_score.setText(score.toString());
+    	current_score.setText((CharSequence) players.get(id).score.toString());
     }
     
     @Override
@@ -415,7 +412,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(true) {
+    	if(players.size() == 1) {
      	   	menu.findItem(R.id.next).setEnabled(false);
      	   	menu.findItem(R.id.prev).setEnabled(false);
      	   	menu.findItem(R.id.sub_player).setEnabled(false);
@@ -465,7 +462,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	   return true;
     }
     
-    // Probably wrong
     private long numPlayers() {
         String sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
         SQLiteStatement statement = 
@@ -500,9 +496,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "< " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void nextPlayer() {
@@ -510,30 +505,29 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
 				TABLE_NAME + "WHERE " + _ID + "> " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
 		db.close();
-		getPlayer(p);
+		getPlayer(c.getInt(0));
 	}
 
 	public void getPlayer(int player_id) {
 
 		// Get stored value of items
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" FROM "+TABLE_NAME+" WHERE "+_ID+"="+String.valueOf(player_id), null);
+    	Cursor c = db.query(TABLE_NAME, columns, _ID + "=?", new String [] { String.valueOf(player_id) }, null, null, null);
     	Log.d("# of rows = ", ((Integer) c.getCount()).toString());
+    	db.close();
+//    	Cursor c = db.rawQuery("SELECT * FROM ? WHERE ? = ?;", new String [] { TABLE_NAME, _ID, String.valueOf(player_id) } );
     	startManagingCursor(c);
-    	if(c.moveToFirst()) {
+    	if(c.getCount() != 0) {
+    		c.moveToFirst();
     		name = c.getString(0);
     		score = c.getInt(1);
     	} else {
-    		//addPlayer("Player 1");
-    		//name = "Player 1";
-    		//score = 0;
-    		Log.d("No player found","");
+    		addPlayer("Player 1");
+    		name = "Player 1";
+    		score = 0;
     	}
-    	
-    	db.close();
-    	
+		
 		// display stuff
     	player.setText(name);
 		current_score.setText(score.toString());
