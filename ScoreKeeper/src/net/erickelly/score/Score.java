@@ -1,11 +1,10 @@
 package net.erickelly.score;
 
-import java.util.ArrayList;
-
 import net.erickelly.score.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -13,6 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.Log;
@@ -28,6 +29,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import static net.erickelly.score.Constants.NAME;
+import static net.erickelly.score.Constants.SCORE;
+import static net.erickelly.score.Constants.TABLE_NAME;
+import static android.provider.BaseColumns._ID;
 
 public class Score extends Activity implements OnClickListener, OnLongClickListener {
     /** Called when the activity is first created. */
@@ -41,10 +46,10 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	Resources res;
 	Drawable shape;
 	RelativeLayout ll;
-	Handler h;
 	static String background;
 	static String separator = "<>";
 	Handler handler;
+	private DatabaseHelper dbHelper;
 	
 	// Button Reference Variables
 	// Names do not refer to actual values, but their positions
@@ -64,7 +69,11 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	static Integer id;
 	static String name;
 	static Integer score;
-	static ArrayList<Player> players = new ArrayList<Player>();
+	static SQLiteDatabase db;
+	
+	// Helpful constants
+	final String [] columns = new String [] { NAME, SCORE };
+
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,8 +85,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         
         pref = getSharedPreferences("preferences",MODE_WORLD_WRITEABLE);
         res = getResources();
-    	       	
-    	restorePlayers();
         
         // Set the on screen handlers
         current_score = (TextView) findViewById(R.id.score);
@@ -109,17 +116,104 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         		
 		handler = new Handler();
     	
+        dbHelper = new DatabaseHelper(this);
+    	restorePlayers();
+		
     }
     
     private void restorePlayers() {
-    	String ps = pref.getString("players", (new Player("Player",0)).serialize());
-		String a[] = ps.split(separator);
-		if (players.size() == 0) {
-			for(int i = 0; i < a.length; i++) {
-				players.add(Player.unpack(a[i]));
-			}
-		}
-		Log.d("Got this far", "hi");
+    	
+    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	id = prefs.getInt("current_player", 1);
+    	Log.d("id = ", id.toString());
+    	
+//    	String ORDER_BY = _ID + " ASC";
+//    	// Perform a managed query. The Activity will handle closing 
+//    	// and re-querying the cursor when needed. 
+//    	try {
+//    		SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        	Cursor cursor = db.query(TABLE_NAME, columns, _ID + "=?", 
+//        			new String [] { String.valueOf(id) } , null, null, ORDER_BY);
+//        	startManagingCursor(cursor);
+//        	
+////        	if(numPlayers() != 0) {
+////        		while(cursor.moveToNext()) {
+////        			id = cursor.getInt(0);
+////        			name = cursor.getString(1);
+////        			score = cursor.getInt(2);
+//////        			players.add(new Player(name,score,id));
+////        		} 
+////        	}
+//        	
+//        	
+//        } finally { 
+//       		dbHelper.close();
+//       		getPlayer(id);
+//       	}
+    	getPlayer(id);
+   	}
+    
+//    private void savePlayers() {    	
+//    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+//    	db.up
+////    	for(int i = 0; i < numPlayers(); i++) {
+////    		ContentValues values = new ContentValues();
+////    		values.put(NAME, players.get(i).name);
+////    		values.put(SCORE, players.get(i).score);
+////    		db.insertOrThrow(TABLE_NAME, null, values);
+////    	}
+//    	db.close();
+//	}
+    
+//    public void savePlayer() {
+//		// Save current stuff
+//		players.get(id).name = name;
+//		players.get(id).score = score;
+//	}
+    
+    public void addPlayer(String name) {
+    	Log.d("addPlayer","adding player");
+    	Log.d("Current num of players:",numPlayers().toString());
+    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	ContentValues cv = new ContentValues();
+    	cv.put(NAME, name); //+ Integer.parseInt(db.rawQuery("SELECT MAX(" + _ID + ") FROM " + TABLE_NAME, null).getString(0)));
+    	cv.put(SCORE, 0);
+    	try {
+    		db.insertOrThrow(TABLE_NAME, null, cv);
+    	} catch(Exception e) {
+    		Log.d("Couldn't insert", e.toString());
+    	}
+    	db.close();
+    	getPlayer(lastPlayer());
+
+//    	// Get last record
+////    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" WHERE "+_ID
+////    			+" = (SELECT MAX("+_ID+") FROM "+TABLE_NAME+");", null);
+//    	Cursor c = db.rawQuery("SELECT ?, ? WHERE ? = (SELECT MAX(?) FROM ?);", 
+//    				new String [] { NAME, SCORE, _ID, _ID, TABLE_NAME });
+//    	startManagingCursor(c);
+//    	db.close();
+//  		name = c.getString(0);
+//  		score = c.getInt(1);
+//		
+//		// display stuff
+//		current_score.setText(score.toString());
+//		player.setText(name);
+	}
+    
+    public Integer lastPlayer() {
+    	
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+TABLE_NAME+";", null);
+    	startManagingCursor(c);
+    	if(c.moveToFirst()) {
+    		Log.d("LastPlayer:",((Integer) c.getInt(0)).toString());
+    		int count = c.getInt(0);
+    		db.close();
+    		return count;
+    	}
+    	db.close();
+    	return -1;
     }
     
     private void restoreBackground() {
@@ -159,8 +253,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	}
 
     public void updateScore(int i) {
-		players.get(id).updateScore(i);
+		//players.get(id).updateScore(i);
 		score = score + i;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		cv.put(SCORE, score);
+		db.update(TABLE_NAME, cv, _ID+"=?", new String []{String.valueOf(id)}); 
+		db.close();
 		current_score.setText((CharSequence) score.toString());
 	}
     
@@ -173,18 +272,33 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	if(extras != null) {
     		id = extras.getInt("playerid");
     	} else {
-        	id = pref.getInt("current_player", 0);
+        	id = pref.getInt("current_player", 1);
     	}
     	
     	// Get stored value of items
-    	score = players.get(id).score;
-        name = players.get(id).name;
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	//Cursor c = db.query(TABLE_NAME, columns, _ID + "=?", new String [] { String.valueOf(id) }, null, null, null);
+    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" FROM "+TABLE_NAME+" WHERE "+_ID+"= "+String.valueOf(id), null);
+    	startManagingCursor(c);
+    	if(c.moveToFirst()) {
+	    	name = c.getString(0);
+	    	score = c.getInt(1);
+    	} else if(numPlayers() < 1) {
+    		Log.d("Num Players", "Thinks there's less than 1");
+    		addPlayer("Player 1");
+    	} else {
+    		getPlayer(firstPlayer());
+    	}
+    	db.close();
+    	
+    	//score = players.get(id).score;
+        //name = players.get(id).name;
     	restoreBackground();
         setSets();
         
         // display the variables
         player.setText(name);
-    	current_score.setText((CharSequence) players.get(id).score.toString());
+    	current_score.setText(score.toString());
     }
     
     @Override
@@ -305,15 +419,16 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(players.size() == 1) {
-     	   menu.findItem(R.id.next).setEnabled(false);
-     	   menu.findItem(R.id.prev).setEnabled(false);
-     	   menu.findItem(R.id.sub_player).setEnabled(false);
+    	if(numPlayers() <= 1) {
+     	   	menu.findItem(R.id.next).setEnabled(false);
+     	   	menu.findItem(R.id.prev).setEnabled(false);
+     	   	menu.findItem(R.id.sub_player).setEnabled(false);
         } else {
         	menu.findItem(R.id.next).setEnabled(true);
-      	   menu.findItem(R.id.prev).setEnabled(true);
-      	   menu.findItem(R.id.sub_player).setEnabled(true);
+      	   	menu.findItem(R.id.prev).setEnabled(true);
+      	   	menu.findItem(R.id.sub_player).setEnabled(true);
         }
+    	menu.findItem(R.id.view_all).setEnabled(false);
     	return true;
     }
 
@@ -331,13 +446,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     		case R.id.set_backgound:
     			switchBackground();
     			break;
-    		case R.id.view_all:
+    		/*case R.id.view_all:
     			Intent intent = new Intent(this, PlayerList.class);
     			intent.putExtra("playernum", id);
     			startActivityForResult(intent, 0);
-    			break;
+    			break;*/
     		case R.id.add_player:
-    			Integer i = players.size();
+    			Integer i = (int) numPlayers();
     			i++;
     			addPlayer("Player " + i.toString());
     			break;
@@ -353,60 +468,110 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	}
     	   return true;
     }
+    
+    private Integer numPlayers() {
+        String sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
+        Cursor c = dbHelper.getReadableDatabase().rawQuery(sql, null);
+        startManagingCursor(c);
+        c.moveToFirst();
+        Integer count = c.getInt(0);
+        Log.d("numPlayers()", count.toString());
+        return count;
+    }
 
 	private void subPlayer() {
-		if(!(players.size() < 2)) {
-			players.remove((int) id);
+		if(!(numPlayers() < 2)) {
+			
+	    	// Get stored value of items
+	    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+	    	String [] args = new String [] { String.valueOf(id) };
+	    	db.delete(TABLE_NAME, _ID+"=?", args);
+	    	db.close();
+			
+//			players.remove((int) id);
 			if(!(id == 0)) {
 				id = id - 1;
 			} else {
-				id = players.size() - 1;
+				id = (int) (numPlayers() - 1);
 			}
 			getPlayer(id);
 		}
 	}
-
-	public void addPlayer(String name) {
-		players.add(new Player(name, 0));
-		savePlayer();
-		getPlayer((players.size() - 1));
-	}
 	
 	public void prevPlayer() {
-		if(id == 0) {
-			savePlayer();
-			getPlayer(players.size() - 1);
-		} else {
-			savePlayer();
-			getPlayer(id - 1);
-		}
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+//		String [] columns = new String [] { _ID, NAME, SCORE };
+		// c = db.query(TABLE_NAME, columns, "*", null, null, null, _ID);
+		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ TABLE_NAME + " WHERE " + _ID + " > " + id.toString(), null);
+    	startManagingCursor(c);
+    	Integer p;
+    	if (c.getCount() < 1) {
+    		p = lastPlayer();
+    		Log.d("prevPlayer","Loop around the back");
+    	} else {
+    		c.moveToFirst();
+    		p = c.getInt(0);
+    	}
+    	Log.d("prevPlayer", p.toString());
+		db.close();
+		getPlayer(p);
 	}
 
 	public void nextPlayer() {
-		if(players.size() == (id + 1)) {
-			savePlayer();
-			getPlayer(0);
-		} else {
-			savePlayer();
-			getPlayer(id + 1);
-		}
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
+				TABLE_NAME + " WHERE " + _ID + " < " + id.toString(), null);
+    	startManagingCursor(c);
+    	Integer p;
+    	if (c.getCount() < 1) {
+    		p = firstPlayer();
+    		Log.d("nextPlayer","Looping to the front");
+    	} else {
+    		c.moveToFirst();
+    		p = c.getInt(0);
+    	}
+    	Log.d("nextPlayer",p.toString());
+		db.close();
+		getPlayer(p);
+	}
+
+	private Integer firstPlayer() {
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+TABLE_NAME+";", null);
+    	startManagingCursor(c);
+    	if(c.moveToFirst()) {
+    		Log.d("firstPlayer:",((Integer) c.getInt(0)).toString());
+    		int count = c.getInt(0);
+    		db.close();
+    		return count;
+    	}
+    	db.close();
+    	return -1;
 	}
 
 	public void getPlayer(int player_id) {
-		// Get new stuff
-		id = player_id;
-		name = players.get(player_id).name;
-		score = players.get(player_id).score;
-		
+
+		// Get stored value of items
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+","+_ID+" FROM "+TABLE_NAME+" WHERE "+_ID+"="+String.valueOf(player_id), null);
+    	Log.d("# of rows = ", ((Integer) c.getCount()).toString());
+    	startManagingCursor(c);
+    	if(c.moveToFirst()) {
+    		name = c.getString(0);
+    		score = c.getInt(1);
+    		id = c.getInt(2);
+    	} else {
+    		//addPlayer("Player 1");
+    		//name = "Player 1";
+    		//score = 0;
+    		Log.d("No player found","");
+    	}
+    	
+    	db.close();
+    	
 		// display stuff
+    	player.setText(name);
 		current_score.setText(score.toString());
-		player.setText(name);
-	}
-	
-	public void savePlayer() {
-		// Save current stuff
-		players.get(id).name = name;
-		players.get(id).score = score;
 	}
 
 	public void setScore(String s) {
@@ -420,13 +585,23 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     			int value = Integer.parseInt(s);
     			score = value;
     			current_score.setText((CharSequence) score.toString());
-    			players.get(id).score = value;
+    			
+    			// Write the value to the database
+    			SQLiteDatabase db = dbHelper.getWritableDatabase();
+    			ContentValues cv = new ContentValues();
+    			cv.put(SCORE, value);
+    			db.update(TABLE_NAME, cv, 
+    					_ID + "=?", new String [] { String.valueOf(value) } );
+    			db.close();
+    			
     		} catch(NumberFormatException nfe) {
     			Log.d("setScore","Could not parse " + nfe);
     			Toast toast = Toast.makeText(getApplicationContext(), "Must be an integer.",Toast.LENGTH_SHORT);
     			toast.setGravity(Gravity.BOTTOM, 0, 100);
     			toast.show();
     			createDialog(score.toString(),findViewById(R.id.score));
+    		} catch(Exception e) {
+    			Log.d("setScore", "Dataabase troubles" + e);
     		}
     	}
     }
@@ -494,15 +669,21 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     public void setPlayer(String p) {
     	
-    	if((!p.contains(separator)) && 
-				(!p.contains(Player.separator)) &&
-				(!p.equals(""))) {
+    	if(!p.equals("")) {
     		player.setText((CharSequence) p);
         	name = p;
-        	players.get(id).name = p;
+        	
+        	// Write the value to the database
+			SQLiteDatabase db = dbHelper.getWritableDatabase();
+			ContentValues cv = new ContentValues();
+			cv.put(NAME, p);
+			db.update(TABLE_NAME, cv, 
+					_ID + "=?", new String [] { String.valueOf(id) } );
+			db.close();
+        	
+//        	players.get(id).name = p;
 		} else {
-			Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
-					separator + " and " + Player.separator + " are not allowed.",Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "Empty names are not allowed.",Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.BOTTOM, 0, 100);
 			toast.show();
 			createDialog(p,findViewById(R.id.player));
@@ -521,56 +702,49 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         min3.setText("-" + set3.toString());
     }
     
-    static public void save() {
+    public void save() {
     	    	
-    	String pstring = savePlayers();
+//    	savePlayers();
     	
     	Editor prefedit = pref.edit();
-    	prefedit.putString("players", pstring);
 		prefedit.putInt("set1", set1);
 		prefedit.putInt("set2", set2);
 		prefedit.putInt("set3", set3);
 		prefedit.putString("background",background);
-		if(id >= players.size()) {
-			id = players.size() - 1;
-		}
+//		if(id >= players.size()) {
+//			id = players.size() - 1;
+//		}
 		prefedit.putInt("current_player", id);
 		prefedit.commit();
 		
     }
-    
-    private static String savePlayers() {
-//    	players.get(id).name = name;
-//    	players.get(id).score = score;
-
-    	String acc = "";
-    	for(int index = 0; index < players.size(); index++) {
-        	acc = acc + players.get(index).serialize() + separator;
-    	}
-    	return acc;
-	}
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bundle extras = data.getExtras();
         final Integer i;
-        Integer r;
         if (extras != null) {
-        	r = extras.getInt("playerid");
-            Log.d("playerid", r.toString());
-            Log.d("players.size()", ((Integer)players.size()).toString());
-            if (r >= players.size()) {	
-            	r = players.size() - 1;
-            	Log.d("r",r.toString());
-            }
-        
-            i = r;
-            Log.d("i = ", i.toString());
+        	i = extras.getInt("playerid");
+            Log.d("playerid", i.toString());
+//            if (r >= players.size()) {	
+//            	r = players.size() - 1;
+//            	Log.d("r",r.toString());
+//            }
+//            
+//            // Get the largest ID'd Player
+//			SQLiteDatabase db = dbHelper.getReadableDatabase();
+//			Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ TABLE_NAME, null);
+//			db.close();
         
         } else {
-        	i = 0;
-        }
+        	// Get the smallest ID'd player
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
+			Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ TABLE_NAME, null);
+			startManagingCursor(c);
+			db.close();
+			i = c.getInt(0);
+		}
         
         if(resultCode==RESULT_OK) {            
             
