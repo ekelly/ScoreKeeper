@@ -1,7 +1,0 @@
-package net.erickelly.score;
-
-import android.app.Dialog;
-
-public class CustomDialog extends Dialog {
-
-}
