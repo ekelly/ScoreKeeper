@@ -1,5 +1,6 @@
 package net.erickelly.score;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,6 +23,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + _ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME
 				+ " TEXT," + SCORE + " INTEGER);");
+		ContentValues cv = new ContentValues();
+		cv.put(NAME, "Player 1");
+		cv.put(SCORE, 0);
+		db.insert(TABLE_NAME, null, cv);
 	}
 
 	@Override

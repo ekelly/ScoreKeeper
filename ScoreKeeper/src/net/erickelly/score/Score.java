@@ -1,7 +1,5 @@
 package net.erickelly.score;
 
-import java.util.ArrayList;
-
 import net.erickelly.score.R;
 
 import android.app.Activity;
@@ -16,7 +14,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.Log;
@@ -175,10 +172,11 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 //	}
     
     public void addPlayer(String name) {
-    	// TODO: fix addPlayer
+    	Log.d("addPlayer","adding player");
+    	Log.d("Current num of players:",numPlayers().toString());
     	SQLiteDatabase db = dbHelper.getWritableDatabase();
     	ContentValues cv = new ContentValues();
-    	cv.put(NAME, "Player"); //+ Integer.parseInt(db.rawQuery("SELECT MAX(" + _ID + ") FROM " + TABLE_NAME, null).getString(0)));
+    	cv.put(NAME, name); //+ Integer.parseInt(db.rawQuery("SELECT MAX(" + _ID + ") FROM " + TABLE_NAME, null).getString(0)));
     	cv.put(SCORE, 0);
     	try {
     		db.insertOrThrow(TABLE_NAME, null, cv);
@@ -282,9 +280,15 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	//Cursor c = db.query(TABLE_NAME, columns, _ID + "=?", new String [] { String.valueOf(id) }, null, null, null);
     	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" FROM "+TABLE_NAME+" WHERE "+_ID+"= "+String.valueOf(id), null);
     	startManagingCursor(c);
-    	c.moveToFirst();
-    	name = c.getString(0);
-    	score = c.getInt(1);
+    	if(c.moveToFirst()) {
+	    	name = c.getString(0);
+	    	score = c.getInt(1);
+    	} else if(numPlayers() < 1) {
+    		Log.d("Num Players", "Thinks there's less than 1");
+    		addPlayer("Player 1");
+    	} else {
+    		getPlayer(firstPlayer());
+    	}
     	db.close();
     	
     	//score = players.get(id).score;
@@ -415,7 +419,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(true) {
+    	if(numPlayers() <= 1) {
      	   	menu.findItem(R.id.next).setEnabled(false);
      	   	menu.findItem(R.id.prev).setEnabled(false);
      	   	menu.findItem(R.id.sub_player).setEnabled(false);
@@ -465,12 +469,13 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     	   return true;
     }
     
-    // Probably wrong
-    private long numPlayers() {
+    private Integer numPlayers() {
         String sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
-        SQLiteStatement statement = 
-        	dbHelper.getReadableDatabase().compileStatement(sql);
-        long count = statement.simpleQueryForLong();
+        Cursor c = dbHelper.getReadableDatabase().rawQuery(sql, null);
+        startManagingCursor(c);
+        c.moveToFirst();
+        Integer count = c.getInt(0);
+        Log.d("numPlayers()", count.toString());
         return count;
     }
 
@@ -497,10 +502,17 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 //		String [] columns = new String [] { _ID, NAME, SCORE };
 		// c = db.query(TABLE_NAME, columns, "*", null, null, null, _ID);
-		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ 
-				TABLE_NAME + "WHERE " + _ID + "< " + id.toString(), null);
+		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ TABLE_NAME + " WHERE " + _ID + " > " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
+    	Integer p;
+    	if (c.getCount() < 1) {
+    		p = lastPlayer();
+    		Log.d("prevPlayer","Loop around the back");
+    	} else {
+    		c.moveToFirst();
+    		p = c.getInt(0);
+    	}
+    	Log.d("prevPlayer", p.toString());
 		db.close();
 		getPlayer(p);
 	}
@@ -508,23 +520,46 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	public void nextPlayer() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
-				TABLE_NAME + "WHERE " + _ID + "> " + id.toString(), null);
+				TABLE_NAME + " WHERE " + _ID + " < " + id.toString(), null);
     	startManagingCursor(c);
-    	int p = c.getInt(0);
+    	Integer p;
+    	if (c.getCount() < 1) {
+    		p = firstPlayer();
+    		Log.d("nextPlayer","Looping to the front");
+    	} else {
+    		c.moveToFirst();
+    		p = c.getInt(0);
+    	}
+    	Log.d("nextPlayer",p.toString());
 		db.close();
 		getPlayer(p);
+	}
+
+	private Integer firstPlayer() {
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+TABLE_NAME+";", null);
+    	startManagingCursor(c);
+    	if(c.moveToFirst()) {
+    		Log.d("firstPlayer:",((Integer) c.getInt(0)).toString());
+    		int count = c.getInt(0);
+    		db.close();
+    		return count;
+    	}
+    	db.close();
+    	return -1;
 	}
 
 	public void getPlayer(int player_id) {
 
 		// Get stored value of items
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+" FROM "+TABLE_NAME+" WHERE "+_ID+"="+String.valueOf(player_id), null);
+    	Cursor c = db.rawQuery("SELECT "+NAME+","+SCORE+","+_ID+" FROM "+TABLE_NAME+" WHERE "+_ID+"="+String.valueOf(player_id), null);
     	Log.d("# of rows = ", ((Integer) c.getCount()).toString());
     	startManagingCursor(c);
     	if(c.moveToFirst()) {
     		name = c.getString(0);
     		score = c.getInt(1);
+    		id = c.getInt(2);
     	} else {
     		//addPlayer("Player 1");
     		//name = "Player 1";
@@ -634,9 +669,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     public void setPlayer(String p) {
     	
-    	if((!p.contains(separator)) && 
-				(!p.contains(Player.separator)) &&
-				(!p.equals(""))) {
+    	if(!p.equals("")) {
     		player.setText((CharSequence) p);
         	name = p;
         	
@@ -650,8 +683,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
         	
 //        	players.get(id).name = p;
 		} else {
-			Toast toast = Toast.makeText(getApplicationContext(), "Empty names and the characters " +
-					separator + " and " + Player.separator + " are not allowed.",Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "Empty names are not allowed.",Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.BOTTOM, 0, 100);
 			toast.show();
 			createDialog(p,findViewById(R.id.player));
