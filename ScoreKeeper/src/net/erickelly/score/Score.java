@@ -73,7 +73,6 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	
 	// Helpful constants
 	final String [] columns = new String [] { NAME, SCORE };
-
 		
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,59 +116,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		handler = new Handler();
     	
         dbHelper = new DatabaseHelper(this);
-    	restorePlayers();
 		
     }
-    
-    private void restorePlayers() {
-    	
-    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-    	id = prefs.getInt("current_player", 1);
-    	Log.d("id = ", id.toString());
-    	
-//    	String ORDER_BY = _ID + " ASC";
-//    	// Perform a managed query. The Activity will handle closing 
-//    	// and re-querying the cursor when needed. 
-//    	try {
-//    		SQLiteDatabase db = dbHelper.getReadableDatabase();
-//        	Cursor cursor = db.query(TABLE_NAME, columns, _ID + "=?", 
-//        			new String [] { String.valueOf(id) } , null, null, ORDER_BY);
-//        	startManagingCursor(cursor);
-//        	
-////        	if(numPlayers() != 0) {
-////        		while(cursor.moveToNext()) {
-////        			id = cursor.getInt(0);
-////        			name = cursor.getString(1);
-////        			score = cursor.getInt(2);
-//////        			players.add(new Player(name,score,id));
-////        		} 
-////        	}
-//        	
-//        	
-//        } finally { 
-//       		dbHelper.close();
-//       		getPlayer(id);
-//       	}
-    	getPlayer(id);
-   	}
-    
-//    private void savePlayers() {    	
-//    	SQLiteDatabase db = dbHelper.getWritableDatabase();
-//    	db.up
-////    	for(int i = 0; i < numPlayers(); i++) {
-////    		ContentValues values = new ContentValues();
-////    		values.put(NAME, players.get(i).name);
-////    		values.put(SCORE, players.get(i).score);
-////    		db.insertOrThrow(TABLE_NAME, null, values);
-////    	}
-//    	db.close();
-//	}
-    
-//    public void savePlayer() {
-//		// Save current stuff
-//		players.get(id).name = name;
-//		players.get(id).score = score;
-//	}
     
     public void addPlayer(String name) {
     	Log.d("addPlayer","adding player");
@@ -203,6 +151,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     
     public Integer lastPlayer() {
     	
+    	Log.d("LastPlayer","running");
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
     	Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+TABLE_NAME+";", null);
     	startManagingCursor(c);
@@ -211,6 +160,8 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     		int count = c.getInt(0);
     		db.close();
     		return count;
+    	} else {
+    		Log.d("LastPlayer","something went wrong");
     	}
     	db.close();
     	return -1;
@@ -489,12 +440,15 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	    	db.close();
 			
 //			players.remove((int) id);
-			if(!(id == 0)) {
-				id = id - 1;
+	    	/*
+			if(!(id == firstPlayer())) {
+				prevPlayer();
 			} else {
-				id = (int) (numPlayers() - 1);
+				id = lastPlayer();
+				getPlayer(id);
 			}
-			getPlayer(id);
+			*/
+	    	prevPlayer();
 		}
 	}
 	
@@ -502,14 +456,16 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 //		String [] columns = new String [] { _ID, NAME, SCORE };
 		// c = db.query(TABLE_NAME, columns, "*", null, null, null, _ID);
-		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ TABLE_NAME + " WHERE " + _ID + " > " + id.toString(), null);
+		Cursor c = db.rawQuery("SELECT MAX("+_ID+") FROM "+ TABLE_NAME + " WHERE " + _ID + " < " + id.toString(), null);
     	startManagingCursor(c);
     	Integer p;
-    	if (c.getCount() < 1) {
+    	Log.d("Cursor count",((Integer) c.getCount()).toString());
+    	if (!c.moveToFirst() || c.getInt(0) == 0) {
     		p = lastPlayer();
     		Log.d("prevPlayer","Loop around the back");
     	} else {
     		c.moveToFirst();
+    		Log.d("Column Name: ", c.getColumnName(0));
     		p = c.getInt(0);
     	}
     	Log.d("prevPlayer", p.toString());
@@ -520,10 +476,10 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
 	public void nextPlayer() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT MIN("+_ID+") FROM "+ 
-				TABLE_NAME + " WHERE " + _ID + " < " + id.toString(), null);
+				TABLE_NAME + " WHERE " + _ID + " > " + id.toString(), null);
     	startManagingCursor(c);
     	Integer p;
-    	if (c.getCount() < 1) {
+    	if (!c.moveToFirst() || c.getInt(0) == 0) {
     		p = firstPlayer();
     		Log.d("nextPlayer","Looping to the front");
     	} else {
@@ -564,7 +520,7 @@ public class Score extends Activity implements OnClickListener, OnLongClickListe
     		//addPlayer("Player 1");
     		//name = "Player 1";
     		//score = 0;
-    		Log.d("No player found","");
+    		Log.d("No player found","Move to first worked! What do you know!");
     	}
     	
     	db.close();
